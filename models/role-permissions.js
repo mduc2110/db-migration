@@ -24,6 +24,14 @@ module.exports = (sequelize, DataTypes) => {
          },
          allowNull: false,
       },
+      createdAt: {
+         type: DataTypes.DATE,
+         defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+         type: DataTypes.DATE,
+         defaultValue: DataTypes.NOW,
+      },
    });
    return rolePermission;
 };

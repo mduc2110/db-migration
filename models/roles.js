@@ -12,7 +12,20 @@ module.exports = (sequelize, DataTypes) => {
          // define association here
          // roles.belongsTo(models.permissions);
          // roles.hasOne(models.permissions);
-         roles.belongsToMany(models.permissions, { through: "role-permission" /* options */ });
+         roles.belongsToMany(models.permissions, {
+            through: "role-permission",
+            // createdAt: {
+            //    type: DataTypes.DATE,
+            //    allowNull: false,
+            //    defaultValue: DataTypes.NOW,
+            // },
+            // updatedAt: {
+            //    type: DataTypes.DATE,
+            //    allowNull: false,
+            //    defaultValue: new Date(),
+            // },
+            /* options */
+         });
       }
    }
    roles.init(

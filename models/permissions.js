@@ -34,7 +34,15 @@ module.exports = (sequelize, DataTypes) => {
          // permissions.belongsTo(models.roles, {
          //    foreignKey: "roleId",
          // });
-         permissions.belongsToMany(models.roles, { through: "role-permission" /* options */ });
+         permissions.belongsToMany(models.roles, {
+            through: "role-permission",
+
+            /* options */
+            test: {
+               allowNull: false,
+               defaultValue: true,
+            },
+         });
       }
    }
    permissions.init(
