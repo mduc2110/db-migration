@@ -8,6 +8,7 @@ db.sequelize.sync({ alter: true }).catch((err) => {
 
 const Role = db.roles;
 const Permission = db.permissions;
+const User = db.users;
 app.use(express.json());
 app.get("/", async (req, res) => {
    try {
@@ -22,6 +23,38 @@ app.get("/", async (req, res) => {
          },
          include: Permission,
          // include: [{ model: "permissions" }, { model: Permission, as: "permission" }],
+      });
+      // const result = await Permission.findAll();
+      res.json(result);
+   } catch (error) {
+      res.json(error.message);
+   }
+});
+
+app.post("/user", async (req, res) => {
+   try {
+      // const result = await Permission.create(role);
+      const user = {
+         username: req.body.username,
+      };
+      const result = await User.create(user);
+      // const result = await Permission.findAll();
+      res.json(result);
+   } catch (error) {
+      res.json(error.message);
+   }
+});
+app.get("/user/:id", async (req, res) => {
+   try {
+      // const result = await Permission.create(role);
+      const user = {
+         username: req.params.id,
+      };
+      const result = await User.findOne({
+         where: {
+            id: req.params.id,
+         },
+         include: { model: Role, include: Permission },
       });
       // const result = await Permission.findAll();
       res.json(result);
