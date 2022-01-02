@@ -1,7 +1,9 @@
 const express = require("express");
 const db = require("./models");
 const app = express();
-
+const path = require("path");
+const dotenv = require("dotenv");
+const { globalAgent } = require("http");
 db.sequelize.sync({ alter: true }).catch((err) => {
    console.log(err.message);
 });
@@ -62,7 +64,13 @@ app.get("/user/:id", async (req, res) => {
       res.json(error.message);
    }
 });
-
+const envPath = path.resolve(process.cwd(), ".env");
+const parsed = dotenv.config({
+   path: envPath,
+}).parsed;
+console.log(parsed);
+global.env = parsed;
+console.log(global.env);
 app.listen(3434, () => {
    console.log("Server is running");
 });

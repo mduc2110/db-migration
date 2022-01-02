@@ -31,6 +31,10 @@ module.exports = {
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW,
          },
+         roleId: {
+            type: Sequelize.INTEGER,
+            references: { model: "roles", key: "id" },
+         },
       });
    },
    down: async (queryInterface, Sequelize) => {
